@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Wild West</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="/tester/js/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div class="close_page"></div>
+    <script>
+        $.get("checker.php",(r)=> +r ? $("body").addClass("editor") : $("body").removeClass("editor"));
+    </script>
+    <div class="column">
+        <div id="form_holder">
+            <form id="search" action="#">
+                <button style="display:none;"></button>
+                <input type="text" id="to_search" placeholder="Damage" />
+                <div id="searcher" class="button">Search</div>
+                <div>
+
+                    Type: <select id="search_type">
+                            <option value="any" selected>Any</option>
+                            <option value="skill">Skill</option>
+                            <option value="effect">Effect</option>
+                        </select>
+                    
+                    <span id="effect_block"> 
+                        Includes: <select id="search_effect">
+                        <option value="0" selected>Any</option>
+                    </select>
+                    </span>
+                </div>
+                <div id="passive_block">
+                    Passivity: <select id="search_passive">
+                            <option value="any" selected>Any</option>
+                            <option value="1">Passive</option>
+                            <option value="0">Active</option>
+                        </select>
+                </div>
+                <div id="offensive_block">
+                    Direction: <select id="search_offensive">
+                            <option value="any" selected>Any</option>
+                            <option value="0">Defensive</option>
+                            <option value="1">Offensive</option>
+                        </select>
+                </div>
+               
+                <div>
+                    Level Range: <input id="min-level" type="number" min="0" max="50" placeholder="0"/> - <input id="max-level" type="number" placeholder="50" min="1" max="50"/>
+                    <div style="float:right;"><div id="add_item" class="button">Add Skill</div></div>
+                </div>
+
+            </form>
+            
+        </div>
+        <div id="found_holder">
+            <div class="found_item">
+                <div class="found_icon"></div>
+                <div class="found_name"></div>
+                <span class="found_level"></span>
+                <div class="found_type"></div>
+            </div>
+        </div>
+    </div>
+    <div class="column" id="chosen_item">
+        <div>
+            <div style="text-align:center;"><img class="chosen_icon_set" style="display:none;" alt="icon" /></div>
+            <div class="chosen_icon_set" style="display:none;" id="chosen_icon">Icon: <input type="text" name="picture" disabled/></div>
+            <div style="display:none;" id="add_icon">Icon: <input type="file" accept="image/*" /></div>
+            
+            <div id="chosen_name">Name: <input type="text" name="name" disabled/></div>
+            <div>Description:</div>
+            <div id="chosen_desc"><textarea disabled></textarea></div>
+            <div id="effect_list">
+                <div>Effect 1: <select name="effect1"><option value="0" selected>None</option></select></div>
+                <div>Effect 2: <select name="effect2"><option value="0" selected>None</option></select></div>
+                <div>Effect 3: <select name="effect3"><option value="0" selected>None</option></select></div>
+                <div>Effect 4: <select name="effect4"><option value="0" selected>None</option></select></div>
+                <div>Effect 5: <select name="effect5"><option value="0" selected>None</option></select></div>
+            </div>
+            <div>Percentage: <input id="chosen_percentage" type="number" name="percentage" max="100" min="0" disabled/></div>
+            <div>Chance: <input id="chosen_chance" type="number" name="chance" max="100" min="0" disabled/></div>
+            <div>CoolDown: <input id="chosen_cd"  name="cd" type="number" min="0" disabled/></div>
+            <div>Level: <input id="chosen_level" type="number" name="level" disabled/></div>
+            <div>Passive: <input type="checkbox" id="chosen_passive" name="passive" disabled/></div>
+            <div>Offensive: <input type="checkbox" id="chosen_offensive" name="offensive" disabled/></div>
+
+            <div class="button_set">
+                <div class="button" id="printo" onclick="window.print()">Print</div>
+                <div class="button" id="add">Add</div>
+                <div class="button" id="edit">Edit</div>
+                <div class="button" id="cancel">Cancel</div>
+            </div>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

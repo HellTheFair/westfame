@@ -1,0 +1,6 @@
+<?php
+    require_once("../includes/connect_db.php");
+    for($i=1;$i<=50;$i++){
+        $con->query("UPDATE login set fame=".$default_fame*$wins_for_level[$i-1]." WHERE level=".$i);
+    }
+?>

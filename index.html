@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>West's Fame Online Game</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, user-scalable=no"/>
+		<meta name="author" content="WestFame team"/>
+		<meta name="description" content="West's Fame is a Free-to-Play online browser game with a theme of good old Wild West. Duel with other players. Earn Fame. Dominate the competition."/>
+		<meta name="keywords" content="West fame, West's fame, wests fame, westfame, westfame game, Wild West, browser online games"/>
+		<meta charset="utf-8"/>
+		<link rel="canonical" href="https://westfame.com"/>
+		<link rel="stylesheet" href="style.css"/>
+		<link rel="icon" href="img/game_start_bg.png"/>
+		<link rel="stylesheet" href="css/odometer.css"/>
+		<link href="https://fonts.googleapis.com/css?family=Kreon" rel="stylesheet"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<!--script src="js/jquery-3.2.1.js"></script-->
+		<script src="js/odometer.js"></script>
+		<script src="js/jquery.mousewheel.min.js"></script>
+		<script src="https://www.google.com/recaptcha/api.js?render=6LeNlKMUAAAAAKCXe6coNW1ommMpCGcxsRVGR23B" async>
+		</script>
+		<script>
+			screen.orientation.lock('landscape').catch(()=>{});
+		</script>
+	</head>
+	<body>
+		<div id="loading_screen" class="page">
+			<div class="revolver">
+				<div class="revolver__part"></div>
+				<div class="revolver__part"></div>
+				<div class="revolver__part"></div>
+				<div class="revolver__part"></div>
+				<div class="revolver__part"></div>
+				<div class="revolver__part"></div>
+			</div>
+		</div>
+		<div id="rotate_screen_block">
+			<div>
+				<div class="icon_rotate"></div>
+				<div>Rotate your screen to horizontal position for better experience</div>
+			</div>
+		</div>
+		<div id="login_page" class="page">
+			<div class="holder_center">
+				<h1 id="the_title">West's Fame</h1>
+				<div class="flexed">
+					<div id="new_game_holder" class="centered">
+						<div id="new_game" class="button">Start New Game</div>
+					</div>
+					<div id="login_form_holder" class="centered">
+						<form id="login" class="centered" action="#">
+							<div class="text_box">Log in</div>
+							<div><input type="text" id="login_login" placeholder="email" required/></div>
+							<div>
+								<div>
+								<input type="password" id="login_password" placeholder="password" required/><div class="password_toggle" tabindex="1"></div>
+								</div>
+							</div>
+							<div><div id="login_submit" class="button" tabindex="1">Enter</div></div>
+							<input type="submit" style="display:none;" tabindex="-1" />
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div id="new_item_display" class="overall_block">
+			<div class="holder_center centered bg_texture">
+				<div class="text_block text_box">Items Acquired:</div>
+				<div class="loader">
+					<div class="new_item">Item</div>
+					<div class="new_item">Item</div>
+					<div class="new_item">Item</div>
+				</div>
+				<div id="new_item_extra" class=" text_box">And&nbsp;<span>1</span>&nbsp;more</div>
+				<div class="text_block text_box">Click anywhere to continue</div>
+			</div>
+		</div>
+
+		<div id="alerter">
+			<div class="retro_filter bg_holder faded light_texture"></div>
+			<div class="loader"></div>
+		</div>
+
+		<!--PAGE-->
+		<div id="game_menu_page" class="page">
+			<div id="course_buttons">
+				<div class="button" id="exit">Quit</div>
+			</div>
+            <div id="quest_log_block" class="wooden_texture wooden_border has_header">
+                <div class="text_block">Quest Log</div>
+                <div class="close_holder"></div>
+                <div class="remove_scroller">
+                    <div class="loader">
+                        <div class="active_quest light_texture">
+                            <div class="quest_progress right_side_text">
+                                <span class="quest_current">10</span>/<span class="quest_aim">100</span>
+                            </div>
+                            <div class="quest_desc">
+                                Do smthin bla bla bla
+                            </div>
+
+                            <div class="quest_reward">Reward:
+                                <span class="quest_reward_value">
+                                    <b class="gold">100</b>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			<div id="account_detail_block" class="focusable light_texture light_wooden_border has_header">
+				<div>Account Info</div>
+				<form id="account_detail">
+					<div class="structured_data">
+						<div class="flexed" id="new_name">
+							<div>Name</div>
+							<div><input type="text" disabled/></div>
+						</div>
+						<div class="flexed" id="new_email">
+							<div>Email</div>
+							<div><input type="email"/></div>
+						</div>
+						<div class="flexed" id="new_password">
+							<div>New Password</div>
+							<div><input type="password" class="password_type" placeholder="********"/><div class="password_toggle"></div></div>
+						</div>
+						<div class="flexed" id="current_password">
+							<div>Current&nbsp;Password</div>
+							<div><input type="password"/><div class="password_toggle"></div></div>
+							<div class="stay_visible"><div class="button" id="update_account_detail">Update</div></div>
+						</div>
+
+						<div class="flexed">
+							<div>Status</div>
+							<div id="account_status_name"></div>
+						</div>
+						<div class="flexed">
+							<div class="prevent_shrink">Description</div>
+							<div id="account_status_desc"></div>
+						</div>
+						<div class="flexed">
+							<div>Account Created</div>
+							<div id="account_created"></div>
+						</div>
+					</div>
+				</form>
+				<div class="close_holder"></div>
+			</div>
+			<div id="level_up_holder" class="focusable outer_shadow centered holder_center wooden_border bg_texture has_header">
+				<div class="text_block">Level Up</div>
+				<div class="text_block"><span id="level_now" class="level_icon"></span><i class="increase_arrows"></i> <span id="level_next"></span></div>
+				<div class="text_block"><span id="hp_now" class="hp_icon"></span><i class="increase_arrows"></i> <span id="hp_next"></span></div>
+				<div class="text_block">new skills: <span id="next_skills"></span></div>
+				<div class="button" id="buy_level"><span class="gold" id="gold_to_level">100</span><div id="pseudo_buy_level"></div></div>
+				<div class="close_holder"></div>
+			</div>
+			<div id="menu_saloon" class="clickable no_shadow"></div>
+			<div id="menu_shop" class="clickable">
+				<div id="shop_sign"></div>
+			</div>
+			<div id="menu_home" class="clickable"></div>
+			<div class="main_divider">
+				<div class="divider">
+
+					<div id="user_block">
+						<div class="user_name_holder bg_texture"><span class="user_name">New guy</span><span class="user_title"></span></div>
+						<div id="user_data" class="bg_texture">
+							<div class="avatar prevent_shrink">
+								<div class="user_level bg_texture">1</div>
+							</div>
+							<div class="fluid">
+								<div class="user_hp_bar"><span>100/100</span><div class="user_hp"></div></div>
+								<div class="wealth_block"><span class="user_fame odometer">0</span><span class="user_gold odometer">0</span></div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+			<div class="divider">
+				<div class="the_button" id="add_request">
+					<div class="down_tooltip">Server is down</div>
+					<span id="find_duel_text">Find a Duel</span>
+					<span id="cancel_duel_text">Stop Looking</span>
+					<div id="pseudo_find_button">Find a Duel</div>
+				</div>
+			</div>
+			<div id="menu_last_enemy"></div>
+			<div id="menu_player" class="clickable"></div>
+			<div id="menu_sheriff" class="clickable no_light">
+				<div id="menu_sheriff_block" class="centered light_texture">
+					<div class="loader">
+					</div>
+					<div id="sheriff_input">
+						<form id="sheriff_form">
+							<div><input type="text"/></div>
+							<input type="submit" style="display:none;" tabindex="-1" />
+							<div><div class="button">Enter</div></div>
+						</form>
+					</div>
+				</div>
+			</div>
+            <div class="shadow_point"></div>
+		</div>
+
+		<!--PAGE-->
+
+		<div id="saloon_page" class="page">
+			<div>
+				<div class="close_page"></div>
+				<div id="chat_holder" class="remove_scroller hor_golden_ratio">
+					<div id="chat">
+						<div class="context_menu">
+							<div id="chat_set_target">Talk to this guy</div>
+							<div id="chat_visit">Visit home</div>
+						</div>
+					</div>
+					<form id="chat_form">
+						<div id="send_holder">
+							<div id="chat_target" data-target="0" data-prev-target="0" data-prev-target-name="Town">Town</div><input type="text" id="msg_input" autocomplete="off"/><div class="button">Say</div>
+						</div>
+					</form>
+				</div>
+				<div class="hor_main_golden_ratio">
+					<div id="buy_hp_holder" class="bg_texture wooden_border holder_center">
+						<div class="text_block">HP Regeneration</div>
+						<div class="user_hp_bar">
+							<span>100/100</span>
+							<div class="user_hp"></div>
+						</div>
+						<div>Time remaining <span id="time_till_full_hp">0:00</span></div>
+						<div id="buy_hp" class="button">Full HP<br><span class="gold" id="hp_price">0</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--PAGE-->
+
+		<div id="home_page" class="page" tabindex="1">
+			<div>
+				<div id="home_title_choice" class="light_texture light_wooden_border home_choice remove_scroller">
+					<div class="loader">
+						<div class="home_item_title home_item">
+							You don't have any titles... Yet...
+						</div>
+					</div>
+					<div class="close_holder"></div>
+				</div>
+				<div id="home_memory_book" class="clickable">
+					<div id="home_book_cover">Memory</div>
+					<div class="book_page">
+						<div class="book_page_part">You achieved nothing... yet...</div>
+					</div>
+					<div id="home_book_side"></div>
+					<div id="home_book_back"></div>
+				</div>
+				<div id="home_decoration_choice" class="outer_shadow home_choice wooden_border bg_texture">
+					<div class="close_holder"></div>
+					<div id="home_decoration_choice_wall" class="remove_scroller wall">
+						<div class="loader flexed"></div>
+					</div>
+					<div id="home_decoration_choice_floor" class="remove_scroller floor">
+						<div class="loader flexed"></div>
+					</div>
+					<div id="home_decoration_choice_table" class="remove_scroller table">
+						<div class="loader flexed"></div>
+					</div>
+				</div>
+				<div id="home_weapon_choice" class="outer_shadow home_choice wooden_border bg_texture">
+					<div class="loader">
+						<div class="home_item">
+							<div class="home_item_name">Name</div>
+							<div class="home_item_desc">Desc</div>
+							<div class="home_item_stats">
+								<div>Dmg</div>
+								<div>and stuff</div>
+								<div class="button home_item_equip">Equip</div>
+							</div>
+						</div>
+					</div>
+					<div class="close_holder"></div>
+				</div>
+				<div id="home_skills_choice" class="home_choice">
+					<div id="home_skills_display" class="flexed">
+						<div class="home_skill_chosen retro_filter empty"></div>
+						<div class="home_skill_chosen retro_filter empty"></div>
+						<div class="home_skill_chosen retro_filter empty"></div>
+						<div class="home_skill_chosen retro_filter empty"></div>
+						<div class="home_skill_chosen retro_filter empty"></div>
+					</div>
+					<div id="home_skills_all" class="flexed">
+						<div class="remove_scroller bg_texture wooden_border ignore_focus" tabindex="1">
+							<div class="loader flexed">
+								<div class="home_item"></div>
+							</div>
+						</div>
+						<div id="home_skill_preview" class="bg_texture wooden_border">
+							<div class="flexed prevent_wrap">
+								<div id="home_skill_icon" class="prevent_shrink retro_filter"></div>
+								<div>
+									<div id="home_skill_name">Skill_Name</div>
+									<div id="home_skill_type">Skill_Type</div>
+								</div>
+							</div>
+							<div id="home_skill_desc">Desc</div>
+							<div><div id="home_skill_use" class="button">Switch</div></div>
+						</div>
+					</div>
+					<div class="close_holder"></div>
+				</div>
+				<div id="home_skin_choice" class="home_choice remove_scroller wooden_border bg_texture">
+					<div class="loader flexed">
+						<div class="home_item">
+							<div class="home_item_desc">Desc</div>
+							<div class="button home_item_equip">Equip</div>
+						</div>
+					</div>
+					<div class="close_holder"></div>
+				</div>
+				<div id="home_wall" class="flexed outer_shadow">
+					<div class="hor_golden_ratio flexed">
+						<div id="home_skin" class="clickable"></div>
+						<div id="home_door">
+							<div id="home_title" class="clickable"></div>
+						</div>
+						<div id="home_twohand" class="clickable">
+							<div></div>
+						</div>
+					</div>
+					<div id="home_wall_decoration" class="hor_main_golden_ratio">
+						<div class="home_decoration wall empty clickable" data-type="wall">
+                            <div>
+                                <div class="decoration_replace">Replace</div>
+                                <div class="decoration_remove">Remove</div>
+                            </div>
+                        </div>
+						<div class="home_decoration wall empty clickable" data-type="wall">
+                            <div>
+                                <div class="decoration_replace">Replace</div>
+                                <div class="decoration_remove">Remove</div>
+                            </div>
+                        </div>
+						<div class="home_decoration floor empty clickable" data-type="floor">
+                            <div>
+                                <div class="decoration_replace">Replace</div>
+                                <div class="decoration_remove">Remove</div>
+                            </div>
+                        </div>
+						<div class="home_decoration floor empty clickable" data-type="floor">
+                            <div>
+                                <div class="decoration_replace">Replace</div>
+                                <div class="decoration_remove">Remove</div>
+                            </div>
+                        </div>
+					</div>
+				</div>
+				<div id="home_floor"></div>
+				<div id="home_table_bg"></div>
+				<div id="home_table" class="flexed">
+					<div class="home_table_decoration">
+						<div class="home_decoration table empty clickable" data-type="table">
+                            <div>
+                                <div class="decoration_replace">Replace</div>
+                                <div class="decoration_remove">Remove</div>
+                            </div>
+                        </div>
+					</div>
+					<div id="home_memory_book_place" class="clickable">
+					</div>
+					<div id="home_weapon_holder">
+						<div id="home_weapon" class="clickable"></div>
+					</div>
+					<div id="home_skills"><div class="clickable"></div></div>
+					<div class="shadow_point"></div>
+				</div>
+			</div>
+			<div class="close_page"></div>
+		</div>
+
+		<!--PAGE-->
+
+		<div id="visitor_page" class="page">
+			<div>
+				<div id="visit_home_wall" class="flexed">
+					<div class="hor_golden_ratio flexed">
+						<div id="visit_home_skin"></div>
+						<div id="visit_home_door">
+							<div id="visit_home_title"></div>
+						</div>
+						<div id="visit_home_twohand">
+							<div></div>
+						</div>
+					</div>
+					<div id="visit_home_wall_decoration" class="hor_main_golden_ratio">
+						<div class="visit_home_decoration wall empty">
+						</div>
+						<div class="visit_home_decoration wall empty">
+						</div>
+						<div class="visit_home_decoration floor empty">
+						</div>
+						<div class="visit_home_decoration floor empty">
+						</div>
+					</div>
+				</div>
+				<div id="visit_home_floor"></div>
+				<div id="visit_home_table_bg"></div>
+				<div id="visit_home_table" class="flexed">
+					<div class="home_table_decoration">
+						<div class="visit_home_decoration table empty">
+						</div>
+					</div>
+					<div id="visit_home_weapon_holder">
+						<div id="visit_home_weapon"></div>
+					</div>
+				</div>
+			</div>
+			<div class="close_page"></div>
+		</div>
+
+		<!--PAGE-->
+
+		<div id="shop_page" class="page">
+			<div>
+				<div id="shop_weapon" class="outer_shadow wooden_border bg_texture vert_main_golden_ratio hor_main_golden_ratio">
+					<div class="flexed">
+						<div class="quarter remove_scroller separate_border inner_shadow">
+							<div id="shop_weapon_list">
+								<div class="shop_weapon_item"></div>
+								<div class="shop_weapon_item"></div>
+								<div class="shop_weapon_item"></div>
+								<div class="shop_weapon_item"></div>
+							</div>
+						</div>
+						<div class="full_quarter inner_shadow" id="shop_weapon_info">
+
+								<div id="shop_weapon_picture">
+								<span id="shop_weapon_name"></span>
+								</div>
+								<div id="shop_weapon_desc">
+								</div>
+								<div id="shop_weapon_stat">
+
+								</div>
+
+							<div id="shop_weapon_buy" class="button">
+								<span class="gold" id="shop_weapon_price"></span>
+							</div>
+						</div>
+					</div>
+					<div class="close_holder"></div>
+				</div>
+				<div id="shop_skin" class="wooden_border bg_texture inner_shadow vert_main_golden_ratio hor_golden_ratio">
+					<div class="flexed">
+						<div class="hor_golden_ratio shop_skin_picture"></div>
+						<div class="hor_main_golden_ratio">
+							<div class="shop_skin_name"></div>
+							<div class="shop_skin_desc"></div>
+							<div class="shop_skin_buy button">
+								<span class="shop_skin_price gold"></span>
+							</div>
+						</div>
+					</div>
+
+					<div class="close_holder"></div>
+				</div>
+				<div id="shop_misc" class="outer_shadow wooden_border bg_texture inner_shadow vert_golden_ratio">
+					<div id="shop_misc_list">
+						<div class="shop_misc_item">
+							<div class="shop_misc_name"></div>
+							<div class="shop_misc_picture"></div>
+							<div class="shop_misc_desc"></div>
+							<div class="shop_misc_buy button">
+								<span class="shop_misc_price gold"></span>
+							</div>
+						</div>
+
+					</div>
+					<div class="close_holder"></div>
+				</div>
+			</div>
+			<div class="close_page"></div>
+			<div id="shop_weapon_btn" class="shop_page_btn clickable"></div>
+			<div id="shop_skin_btn" class="shop_page_btn clickable"></div>
+			<div id="shop_misc_btn" class="shop_page_btn clickable"></div>
+			<div class="shadow_point"></div>
+		</div>
+
+		<!--PAGE-->
+
+		<div id="game_page" class="page outer_shadow">
+			<div class="game_timer bg_texture">00:<span>00</span></div>
+			<div class="combat_log collapse">
+				<div class="remove_scroller">
+					<div class="loader"></div>
+				</div>
+				<div class="collapser">Combat log</div>
+			</div>
+			<img src="img/game/tw.gif" id="game_tw" alt="tumbleweed"/>
+			<div class="overall_block">
+				<div class="result window holder_center">
+					<div class="centered title_block">result</div>
+					<div class="centered subtitle_block">in fight with <span id="result_enemy_name">a Dummy</span></div>
+					<div class="centered text_block">Press any button to leave</div>
+				</div>
+			</div>
+			<div class="skill retro_filter cell" id="reload_skill" data-skill-id="1" data-name="reload" data-desc="Adds up to 3 bullets into the chamber"></div>
+			<div id="game_menu"></div>
+			<div id="playground">
+				<div class="divider">
+					<div class="main_divider">
+						<div id="duel_data">
+							<div id="enemy_name"></div>
+						</div>
+					</div>
+					<div id="enemy_side" class="side divider">
+						<div id="the_enemy" class="enemy cell">
+							<div class="hp_bar">
+								<span>100/100</span>
+								<div class="hp"></div>
+							</div>
+						</div>
+						<div class="enemy cell"></div>
+						<div class="enemy cell"></div>
+						<div class="enemy cell"></div>
+						<div class="enemy cell"></div>
+						<div class="enemy cell"></div>
+					</div>
+				</div>
+				<div class="main_divider">
+					<div id="player_side" class="side main_divider">
+						<div id="the_player" class="player cell">
+							<div class="hp_bar">
+								<span>100/100</span>
+								<div class="hp"></div>
+							</div>
+						</div>
+						<div class="player cell"></div>
+						<div class="player cell"></div>
+						<div class="player cell place"></div>
+						<div class="player cell"></div>
+						<div class="player cell"></div>
+					</div>
+					<div id="player_skills" class="divider">
+							<div class="skill retro_filter cell empty">
+
+							</div>
+							<div class="skill retro_filter cell empty">
+
+							</div>
+							<div class="skill retro_filter cell empty">
+
+							</div>
+							<div class="skill retro_filter cell empty">
+
+							</div>
+							<div class="skill retro_filter cell empty">
+
+							</div>
+						</div>
+				</div>
+			</div>
+			<div id="skill_tooltip">
+				<div class="skill_name">Name</div>
+				<div class="skill_description">Description of that very interesting skill that somebody might use</div>
+			</div>
+			<div id="bullet_holder"><div></div><div id="bullet_amount">x<span>6</span></div></div>
+		</div>
+		<script src="script.js"></script>
+	</body>
+</html>

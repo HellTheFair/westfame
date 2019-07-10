@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Wild West</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="style.css"/>
+    <script src="/tester/js/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div class="close_page"></div>
+    <script>
+        $.get("checker.php",(r)=> +r ? $("body").addClass("editor") : $("body").removeClass("editor"));
+    </script>
+    <div class="column">
+        <div id="form_holder">
+            <form id="search" action="#">
+                <button style="display:none;"></button>
+                <input type="text" id="to_search" placeholder="Revolver" />
+                <div id="searcher" class="button">Search</div>
+                <div>
+                    Type: <select id="search_type">
+                        <option value="0" selected>Any</option>
+                    </select>
+                    <span id="twohand_block" style="display:none;"> 
+                        Weapon type: <select id="twohand">
+                            <option value="any" selected>Any</option>
+                            <option value="0">One Hand</option>
+                            <option value="1">Two Hand</option>
+                        </select>
+                    </span>
+                </div>
+               
+                <div>
+                    Level Range: <input id="min-level" type="number" min="0" max="50" placeholder="0"/> - <input id="max-level" type="number" placeholder="50" min="1" max="50"/>
+                </div>
+            </form>
+            <div id="add_item" class="button">Add Item</div>
+        </div>
+        <div id="found_holder">
+            <div class="found_item">
+                <div class="found_icon"></div>
+                <div class="found_name"></div>
+                <span class="found_level"></span>
+                <div class="found_type"></div>
+            </div>
+        </div>
+    </div>
+    <div class="column" id="chosen_item">
+        <div>
+            <div style="text-align:center;"><img class="chosen_icon_set" style="display:none;" alt="icon" /></div>
+            <div class="chosen_icon_set" style="display:none;" id="chosen_icon">Icon: <input type="text" name="picture" disabled/></div>
+            <div style="display:none;" id="add_icon">Icon: <input type="file" accept="image/*" /></div>
+            
+            <div id="chosen_name">Name: <input type="text" name="name" disabled/></div>
+            <div id="chosen_type" style="display:none;">Type: <select></select></div>
+            <div style="display:none;" id="add_subtype">Position: <select>
+                <option value="floor" selected>Floor</option>
+                <option value="wall" selected>Wall</option>
+                <option value="table" selected>Table</option>
+            </select></div>
+            <div>Description:</div>
+            <div id="chosen_desc"><textarea disabled></textarea></div>
+            <div id="chosen_stats" style="display:none;">
+                <div>Damage: <input id="chosen_dmg_min" type="number" name="min_dmg" disabled/> - <input id="chosen_dmg_max" name="max_dmg" type="number" disabled/></div>
+                <div>Chance to crit: <input id="chosen_crit"  name="chance_to_crit" type="number" disabled/></div>
+                <div>Two hand: <input type="checkbox" id="chosen_twohand" name="twohand" disabled/></div>
+            </div>
+            <div id="chosen_level">Level: <input type="number" name="level" disabled/></div>
+            <div id="chosen_price">Price: <span></span><input type="text" name="price" disabled/></div>
+
+            <div class="button_set">
+                <div class="button" id="printo" onclick="window.print()">Print</div>
+                <div class="button" id="add">Add</div>
+                <div class="button" id="edit">Edit</div>
+                <div class="button" id="cancel">Cancel</div>
+            </div>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
